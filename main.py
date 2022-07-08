@@ -89,20 +89,105 @@ for x in myresult:
   print(x) """
 
 # PREVENT SQL INJECTION
-sql = "SELECT * FROM customers WHERE address = %s"
+""" sql = "SELECT * FROM customers WHERE address = %s"
 adr = ("Yellow Garden 2", )
 mycursor.execute(sql, adr)
 myresult = mycursor.fetchall()
 for x in myresult:
-  print(x)
+  print(x) """
 
+# ORDER BY
+""" sql = "SELECT * FROM customers ORDER BY name"
+mycursor.execute(sql)
+myresult = mycursor.fetchall()
+for x in myresult:
+  print(x) """
+  
+# ORDER BY DESC
+""" sql = "SELECT * FROM customers ORDER BY name DESC"
+mycursor.execute(sql)
+myresult = mycursor.fetchall()
+for x in myresult:
+  print(x) """
 
+# DELETE
+""" sql = "DELETE FROM customers WHERE address = 'Mountain 21'"
+mycursor.execute(sql)
+mydb.commit()
+print(mycursor.rowcount, "record(s) deleted") """
 
+# DELETE PREVENT INJECTION
+""" sql = "DELETE FROM customers WHERE address = %s"
+adr = ("Yellow Garden 2", )
+mycursor.execute(sql, adr)
+mydb.commit()
+print(mycursor.rowcount, "record(s) deleted") """
 
+# DROP TABLE
+""" sql = "DROP TABLE customers"
+mycursor.execute(sql) """
 
+# DROP TABLE IF EXISTS
+""" sql = "DROP TABLE IF EXISTS customers"
+mycursor.execute(sql) """
 
+# UPDATE TABLE
+""" sql = "UPDATE customers SET address = 'Canyon 123' WHERE address = 'Valley 345'"
+mycursor.execute(sql)
+mydb.commit()
+print(mycursor.rowcount, "record(s) affected") """
 
+# UPDATE TABLE: PREVENT SQL INJECTION
+""" sql = "UPDATE customers SET address = %s WHERE address = %s"
+val = ("Valley 345", "Canyon 123")
+mycursor.execute(sql, val)
+mydb.commit()
+print(mycursor.rowcount, "record(s) affected") """
 
+# SELECT LIMIT
+""" mycursor.execute("SELECT * FROM customers LIMIT 5")
+myresult = mycursor.fetchall()
+for x in myresult:
+  print(x) """
+
+# START FROM ANOTHER POSITION
+""" mycursor.execute("SELECT * FROM customers LIMIT 5 OFFSET 2")
+myresult = mycursor.fetchall()
+for x in myresult:
+  print(x) """
+  
+# JOIN
+""" sql = "SELECT \
+  users.name AS user, \
+  products.name AS favorite \
+  FROM users \
+  INNER JOIN products ON users.fav = products.id"
+mycursor.execute(sql)
+myresult = mycursor.fetchall()
+for x in myresult:
+  print(x) """
+  
+# LEFT JOIN
+""" sql = "SELECT \
+  users.name AS user, \
+  products.name AS favorite \
+  FROM users \
+  LEFT JOIN products ON users.fav = products.id"
+mycursor.execute(sql)
+myresult = mycursor.fetchall()
+for x in myresult:
+  print(x) """
+
+# RIGHT JOIN
+""" sql = "SELECT \
+  users.name AS user, \
+  products.name AS favorite \
+  FROM users \
+  RIGHT JOIN products ON users.fav = products.id"
+mycursor.execute(sql)
+myresult = mycursor.fetchall()
+for x in myresult:
+  print(x) """
 
 
 
