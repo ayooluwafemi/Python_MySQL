@@ -70,12 +70,31 @@ for x in myresult:
   print(x) """
   
 # 10. Fetch only one row:
-mycursor.execute("SELECT * FROM customers")
+""" mycursor.execute("SELECT * FROM customers")
 myresult = mycursor.fetchone()
-print(myresult)
+print(myresult) """
 
+# WHERE
+""" sql = "SELECT * FROM customers WHERE address ='Park Lane 38'"
+mycursor.execute(sql)
+myresult = mycursor.fetchall()
+for x in myresult:
+  print(x) """
 
+# WILDCARD CHARACTERS
+""" sql = "SELECT * FROM customers WHERE address LIKE '%way%'"
+mycursor.execute(sql)
+myresult = mycursor.fetchall()
+for x in myresult:
+  print(x) """
 
+# PREVENT SQL INJECTION
+sql = "SELECT * FROM customers WHERE address = %s"
+adr = ("Yellow Garden 2", )
+mycursor.execute(sql, adr)
+myresult = mycursor.fetchall()
+for x in myresult:
+  print(x)
 
 
 
