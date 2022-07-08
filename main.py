@@ -1,9 +1,5 @@
-import mysql.connector
+import dbcon
 
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="yourusername",
-  password="yourpassword"
-)
-
-print(mydb)
+mydb = dbcon.mydb
+mycursor = mydb.cursor()
+mycursor.execute("CREATE DATABASE mydatabase")
